@@ -34,10 +34,10 @@ class XboxController(object):
 
 
     def read(self): # return the buttons/triggers that you care about in this methode
-        x = self.LeftJoystickX
-        y = self.LeftJoystickY
-        rt = self.RightTrigger
-        lt = self.LeftTrigger
+        x = str(self.LeftJoystickX)
+        y = str(self.LeftJoystickY)
+        rt = str(self.RightTrigger)
+        lt = str(self.LeftTrigger)
         #a = self.A
         #b = self.X # b=1, x=2
        # rb = self.RightBumper
@@ -48,9 +48,9 @@ class XboxController(object):
         if(inputs.devices.gamepads):
             self.gamePad = inputs.devices.gamepads[0]
             events = get_gamepad()
-            print(events)
+            #print(events)
             for event in events:
-                print("hello")
+                #print("hello")
                 if event.code == 'ABS_Y':
                     self.LeftJoystickY = event.state / XboxController.MAX_JOY_VAL # normalize between -1 and 1
                 elif event.code == 'ABS_X':

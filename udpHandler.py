@@ -29,7 +29,7 @@ class udpClient():
         #data is str.encode("hello")
         self.UDPClientSocket.sendto(data, (self.remote_ip,self.remote_port))
     def recieve(self):
-        return self.UDPClientSocket.recvfrom(self.bufferSize)
+        return self.UDPClientSocket.recvfrom(self.buffer_size)
 
 
 
