@@ -7,14 +7,21 @@ class udpServer():
         self.UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
         self.UDPServerSocket.bind((listen_ip, listen_port))
         self.buffer_size = buffer_size
+        self.packRecv = False
+        self.addy = ('127.0.0.1', 9999)
 
-    def send(self,data,address):
+    def send(self,data):
         #data is str.encode("hello")
         #address is ("127.0.0.1", 20001)
-        self.UDPServerSocket.sendto(data, address)
+        self.UDPServerSocket.sendto(data, self.addy)
 
     def recieve(self):
-        return self.UDPServerSocket.recvfrom(self.buffer_size)
+        x = self.UDPServerSocket.recvfrom(self.buffer_size)
+        if x and (len(x)>1):
+            self.packRecv = True
+            self.addy = x[1]
+
+        return x
 
 
 
