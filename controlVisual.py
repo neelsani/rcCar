@@ -31,7 +31,7 @@ def updater():
     return
 
 def wreciever():
-    global carData
+    global carData, exitVal
     while True:
 
         carData= client.recieve()
