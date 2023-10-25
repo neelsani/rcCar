@@ -14,7 +14,7 @@ rt = 50
 lt = -30
 carData = None
 def updater():
-    global ps3, exitVal, client, lsx, lsy, rt, lt, carData
+    global ps3, exitVal, client, lsx, lsy, rt, lt
     while True:
         ps3.update()
         x = ps3.read()
@@ -27,11 +27,24 @@ def updater():
         #carData = client.recieve()[0]
         #print('poo')
         if exitVal == True:
-            break
+            return
     return
+
+def wreciever():
+    global carData
+    while True:
+
+        carData= client.recieve()
+        #print("tried")
+        if exitVal == True:
+            return
+
 contUpdate = threading.Thread(target=updater,args=())
 contUpdate.daemon = True
 contUpdate.start()
+contRead = threading.Thread(target=wreciever,args=())
+contRead.daemon = True
+contRead.start()
 h = int(640)
 w = int(640)
 
@@ -52,7 +65,7 @@ while True:
     img = ogImg.copy()
     img = cv2.line(img, (int(w/4), int(h/4)), (int(w/4)+lsx, int(h/4)-lsy), (0,255,0), 10) 
     #img = cv2.line(img, (int(w/4*3), int(h/4)), (int(w/4*3)+rsx, int(h/4)-rsy), (0,255,0), 10) 
-    
+    #carData= client.recieve()
     print(carData)
     cv2.circle(img, (int(w/4)+lsx, int(h/4)-lsy), 5, (255,0,0), -1)
     cv2.rectangle(img, (int(w/4*3+28), int(h/4)-int(88*(2*(rt-.5)))),(int(w/4*3-28), int(h/4)+88), (0,255,0), -1)
@@ -67,4 +80,5 @@ while True:
 exitVal = True
 time.sleep(.3)
 print(contUpdate.is_alive())
+print(contRead.is_alive())
 cv2.destroyAllWindows()

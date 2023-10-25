@@ -1,8 +1,8 @@
-from udpHandler import udpServer
+from udpHandler import udpClient
 import datetime
 import threading
 import time
-server = udpServer(listen_ip="10.241.1.4", listen_port=7878, buffer_size=1024)
+server = udpClient(remote_ip="10.241.1.4",remote_port=7878,buffer_size=1028)
 exitVal = False
 recvData = [None,(None,None)]
 #remote = ("10.241.1.3",7878)
@@ -18,9 +18,9 @@ def serSend():
     global server, exitVal
 
     while True:
-        if server.packRecv:
+        
 
-            server.send(str.encode("server----"+ str(datetime.datetime.now())))
+        server.send(str.encode("client----"+ str(datetime.datetime.now())))
         if exitVal:
             break
     return
@@ -35,10 +35,10 @@ rc.start()
 
 
 while True:
-    print(server.packRecv)
+    #print(server.packRecv)
     try:
-        continue
-        #print(recvData[1][1])
+        
+        print(recvData[0])
     except KeyboardInterrupt:
         break
 
