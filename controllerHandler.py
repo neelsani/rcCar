@@ -38,10 +38,15 @@ class XboxController(object):
         y = str(self.LeftJoystickY)
         rt = str(self.RightTrigger)
         lt = str(self.LeftTrigger)
+        xr = str(self.RightJoystickX)
+        yr = str(self.RightJoystickY)
+        rb = str(self.RightBumper)
+        lb = str(self.RightBumper)
+
         #a = self.A
         #b = self.X # b=1, x=2
        # rb = self.RightBumper
-        return [x, y, rt,lt]
+        return [x, y, rt,lt,xr,yr,rb,lb]
 
 
     def update(self):
