@@ -75,16 +75,20 @@ cv2.rectangle(ogImg, (320, int(h/4)-90),(380, int(h/4)+90), (255,0,0), 2)
 
 while True:
     car = cap.read()
+    car =  cv2.resize(car, (1280,720))
     img = ogImg.copy()
     img = cv2.line(img, (int(w/4), int(h/4)), (int(w/4)+lsx, int(h/4)-lsy), (0,255,0), 10) 
     #img = cv2.line(img, (int(w/4*3), int(h/4)), (int(w/4*3)+rsx, int(h/4)-rsy), (0,255,0), 10) 
     #carData= client.recieve()
-    print(carData)
+    #print(carData)
     cv2.circle(img, (int(w/4)+lsx, int(h/4)-lsy), 5, (255,0,0), -1)
     cv2.rectangle(img, (int(w/4*3+28), int(h/4)-int(88*(2*(rt-.5)))),(int(w/4*3-28), int(h/4)+88), (0,255,0), -1)
     cv2.rectangle(img, (322, int(h/4)-int(88*(2*(lt-.5)))),(378, int(h/4)+88), (0,255,0), -1)
     cv2.imshow("img",img[0:320, 0:640])
-    cv2.imshow("car", cv2.resize(car, (1280,720)))
+    cv2.putText(car,str(int((rt-lt)*100))+"%", (1180,40),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0),3)
+    cv2.imshow("car", car)
+    
+    #print(int((rt-lt)*100))
     #exitVal = True
     #time.sleep(2)
     
