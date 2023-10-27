@@ -26,7 +26,7 @@ x,y,rt,lt,xr,yr,rb,lb = 0, 0, 0, 0,0,0,0,0
 #y - (-1,1)
 #rt - (0,1)
 #lt - (0)
-
+sonic = 0
 try:
 
     while True:
@@ -56,7 +56,11 @@ try:
         mdev.setServo('3', ser_y)
 
         mdev.setBuzzer(rb*2000)
-        server.send(str.encode(str(mdev.getSonic())))
+        try:
+            sonic = str(mdev.getSonic())
+        except:
+            continue
+        server.send(str.encode(sonic))
 
         
 except KeyboardInterrupt:
